@@ -1,0 +1,9 @@
+<% if @content.blank? %>
+
+  'The package doesnot contain a valid package.json file'
+
+<% else %>
+
+  <%=  @content %>
+
+<% end %>

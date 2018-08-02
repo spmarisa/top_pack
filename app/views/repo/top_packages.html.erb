@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Top packages</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Package name</th>
+        <th>count</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @packages.each do |f| %>
+      <tr>
+        <td><%= f.name %></td>
+        <td><%= @counts[f.id] %></td>
+      </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+</div>

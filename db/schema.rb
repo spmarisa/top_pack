@@ -11,6 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20180731075958) do
+
+  create_table "packages", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "packages_repos", id: false, force: :cascade do |t|
+    t.integer "package_id", limit: 4
+    t.integer "repo_id",    limit: 4
+  end
+
+  add_index "packages_repos", ["package_id"], name: "index_packages_repos_on_package_id", using: :btree
+  add_index "packages_repos", ["repo_id"], name: "index_packages_repos_on_repo_id", using: :btree
+
+  create_table "repos", force: :cascade do |t|
+    t.string   "name",                limit: 255
+    t.string   "owner_name",          limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "name_and_owner_name", limit: 255
+  end
 
 end

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<%= form_tag(root_path, method: :get) do %>
+  <%= text_field_tag :query %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
+
+
+
+<% if @github_response %>
+<div class="container">
+  <h2><%= @query %></h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Repo Name</th>
+        <th>Description</th>
+        <th>Link</th>
+        <th>Forks</th>
+        <th>Stars</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @github_response.each do |f| %>
+
+      <tr class="<%= @existing_repos_hash[f.name_and_owner_name] ? 'success' : '' %>">
+        <td><%= f.name %></td>
+        <td><%= f.description %></td>
+        <td><%= f.html_url %></td>
+        <td><%= f.forks %></td>
+        <td><%= f.stars %></td>
+        <td><%= link_to "IMPORT", "#{import_repo_path}?name=#{f.name}&owner_name=#{f.owner_name}" %></td>
+      </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+</div>
+<% end %>
+
+</body>
+</html>
